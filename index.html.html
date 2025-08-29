@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuitos Eléctricos - Colegio Colsubsidio Ciudadela</title>
+    <style>
+        :root {
+            --primary: #4A6FFF;
+            --secondary: #FFB74D;
+            --accent: #4CAF50;
+            --light: #F5F5F5;
+            --dark: #333333;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Portada */
+        #cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4A6FFF 0%, #FFB74D 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            text-align: center;
+        }
+        
+        #cover h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .start-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            border: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .start-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        
+        /* Estilos de la aplicación principal */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            margin: 0.3rem;
+            background: none;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            min-height: 500px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            background: #f9f9f9;
+            padding: 10px;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .interactive-area {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .exercise {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #3a5fd9;
+            transform: translateY(-2px);
+        }
+        
+        .energy-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos para los proyectos */
+        .project-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-details {
+            display: none;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+        
+        .project-details.active {
+            display: block;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Portada -->
+    <div id="cover">
+        <h1>Circuitos Eléctricos</h1>
+        <button class="start-button" onclick="startApp()">Iniciar</button>
+    </div>
+    
+    <!-- Aplicación principal (oculta inicialmente) -->
+    <div id="app" style="display: none;">
+        <header>
+            <h1>Circuitos Eléctricos</h1>
+            <p>¡Aprende sobre circuitos eléctricos y energías renovables de forma divertida!</p>
+        </header>
+        
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="intro">Introducción</button>
+                <button class="tab-btn" data-tab="energy">Energías</button>
+                <button class="tab-btn" data-tab="components">Componentes</button>
+                <button class="tab-btn" data-tab="units">Unidades de la corriente</button>
+                <button class="tab-btn" data-tab="circuits">Circuitos</button>
+                <button class="tab-btn" data-tab="project">Proyecto</button>
+            </div>
+            
+            <!-- Pestaña de Introducción -->
+            <div id="intro" class="tab-content active">
+                <h2>¡Bienvenido al mundo de la electricidad!</h2>
+                <p>¿Alguna vez te has preguntado cómo se enciende una bombilla o cómo funcionan tus juguetes electrónicos? ¡En esta aventura descubrirás los secretos de los circuitos eléctricos!</p>
+                
+                <div class="interactive-area">
+                    <h3>¿Qué es la electricidad?</h3>
+                    <p>La electricidad es un flujo de electrones (partículas pequeñísimas) a través de materiales conductores.</p>
+                    <p>Es como cuando corre el agua por una tubería, pero en lugar de agua, ¡son electrones moviéndose!</p>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div style="display: inline-block; padding: 1.5rem; background: #ffe0b2; border-radius: 15px;">
+                            <p style="font-size: 1.2rem; font-weight: bold;">¿Sabías que?</p>
+                            <p>¡La electricidad puede viajar a una velocidad de hasta 300,000 km por segundo! Eso es casi la velocidad de la luz.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="showTab('energy')">¡Siguiente: Energías!</button>
+                </div>
+            </div>
+            
+            <!-- Pestaña de Energías -->
+            <div id="energy" class="tab-content">
+                <h2>Formas de Producción de Energía</h2>
+                <p>La electricidad puede generarse de diferentes maneras. Conozcamos las energías renovables:</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div style="background: #e3f2fd; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            🌬️
+                        </div>
+                        <div class="card-content">
+                            <h3>Energía Eólica</h3>
+                            <p>Se obtiene del viento que mueve las aspas de los molinos.</p>
+                            <p>Ventajas: No contamina, es renovable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div style="background: #e8f5e9; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            💧
+                        </div>
+                        <div class="card-content">
+                            <h3>Energía Hidráulica</h3>
+                            <p>Se genera con el movimiento del agua en represas o ríos.</p>
+                            <p>Ventajas: Bajo costo una vez construida.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div style="background: #fffde7; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            ☀️
+                        </div>
+                        <div class="card-content">
+                            <h3>Energía Solar</h3>
+                            <p>Se capta de la luz del sol mediante paneles solares.</p>
+                            <p>Ventajas: Abundante y no contaminante.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="interactive-area">
+                    <h3>¿Cómo se relaciona con los circuitos eléctricos?</h3>
+                    <p>Todas estas fuentes de energía pueden generar electricidad que luego usamos en nuestros circuitos:</p>
+                    
+                    <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                        <div style="text-align: center; padding: 1rem; background: #f5f5f5; border-radius: 10px; margin: 0 0.5rem;">
+                            <div class="energy-icon">🌬️</div>
+                            <p>Molino → Generador → Circuito</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 1rem; background: #f5f5f5; border-radius: 10px; margin: 0 0.5rem;">
+                            <div class="energy-icon">☀️</div>
+                            <p>Panel solar → Batería → Circuito</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="showTab('components')">¡Siguiente: Componentes!</button>
+                </div>
+            </div>
+            
+            <!-- Pestaña de Componentes -->
+            <div id="components" class="tab-content">
+                <h2>Componentes Eléctricos Básicos</h2>
+                <p>Los circuitos eléctricos están formados por diferentes componentes. Conozcamos los más importantes:</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <img src="https://st2.depositphotos.com/1674252/5245/v/450/depositphotos_52452505-stock-illustration-9v-square-battery.jpg" alt="Batería">
+                        <div class="card-content">
+                            <h3>Batería</h3>
+                            <p>Proporciona la energía al circuito. Es como el "corazón" que bombea electricidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://es.vexels.com/png-svg/vista-previa/146895/diseno-de-bombilla" alt="Bombilla">
+                        <div class="card-content">
+                            <h3>Bombilla</h3>
+                            <p>Transforma la energía eléctrica en luz. Se enciende cuando pasa la corriente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://previews.123rf.com/images/jemastock/jemastock1911/jemastock191127190/133850691-light-switch-isolated-cartoon-symbol-vector-illustration-graphic-design.jpg" alt="Interruptor">
+                        <div class="card-content">
+                            <h3>Interruptor</h3>
+                            <p>Actúa como una puerta: puede abrir o cerrar el paso de la corriente eléctrica.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://png.pngtree.com/background/20231229/original/pngtree-electric-cables-cables-wiring-conductor-photo-picture-image_7017867.jpg" alt="Cables">
+                        <div class="card-content">
+                            <h3>Cables</h3>
+                            <p>Son los caminos por donde viaja la electricidad. Conectan todos los componentes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>¡Pon a prueba lo aprendido!</h3>
+                    <p>¿Qué componente crees que es necesario para que un circuito funcione y proporcione energía?</p>
+                    <button class="btn" onclick="checkAnswer('bateria', this)">Bombilla</button>
+                    <button class="btn" onclick="checkAnswer('bateria', this)">Interruptor</button>
+                    <button class="btn correct" onclick="checkAnswer('bateria', this)">Batería</button>
+                    <button class="btn" onclick="checkAnswer('bateria', this)">Cables</button>
+                    <p id="feedback" style="margin-top: 1rem; font-weight: bold;"></p>
+                </div>
+                
+                <button class="btn" onclick="showTab('units')" style="display: block; margin: 0 auto;">¡Siguiente: Unidades de la corriente!</button>
+            </div>
+            
+            <!-- Pestaña de Unidades de la corriente -->
+            <div id="units" class="tab-content">
+                <h2>Voltaje, Corriente y Resistencia</h2>
+                <p>Para entender cómo funciona la electricidad, necesitamos conocer tres conceptos importantes:</p>
+                
+                <div style="text-align: center; margin: 2rem 0;">
+                    <img src="https://www.connectcp.org/wp-content/uploads/2025/06/ChatGPT-Image-4-jun-2025_-13_10_36_1_.jpg" alt="Voltaje, Corriente y Resistencia" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div style="background: #ffcdd2; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            ⚡
+                        </div>
+                        <div class="card-content">
+                            <h3>Voltaje (V)</h3>
+                            <p>Es la "fuerza" que empuja a los electrones. Se mide en voltios (V).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div style="background: #c8e6c9; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            🔄
+                        </div>
+                        <div class="card-content">
+                            <h3>Corriente (I)</h3>
+                            <p>Es la cantidad de electrones que fluyen. Se mide en amperios (A).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div style="background: #bbdefb; height: 180px; display: flex; justify-content: center; align-items: center; font-size: 5rem;">
+                            🛑
+                        </div>
+                        <div class="card-content">
+                            <h3>Resistencia (R)</h3>
+                            <p>Es la oposición al paso de la corriente. Se mide en ohmios (Ω).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="interactive-area">
+                    <h3>La analogía del agua</h3>
+                    <p>Imagina que la electricidad es como el agua fluyendo por una tubería:</p>
+                    <ul style="text-align: left; display: inline-block; margin: 1rem 0;">
+                        <li><strong>Voltaje</strong> = La presión del agua</li>
+                        <li><strong>Corriente</strong> = La cantidad de agua que fluye</li>
+                        <li><strong>Resistencia</strong> = Lo estrecha que es la tubería</li>
+                    </ul>
+                </div>
+                
+                <button class="btn" onclick="showTab('circuits')" style="display: block; margin: 0 auto;">¡Siguiente: Circuitos!</button>
+            </div>
+            
+            <!-- Pestaña de Circuitos -->
+            <div id="circuits" class="tab-content">
+                <h2>Tipos de Circuitos Eléctricos</h2>
+                <p>Los componentes se pueden conectar de diferentes maneras, creando distintos tipos de circuitos:</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <img src="https://electronicaonline.net/wp-content/uploads/2020/04/diagrama-de-un-circuito-simple.jpg" alt="Circuito Simple">
+                        <div class="card-content">
+                            <h3>Circuito Simple</h3>
+                            <p>Es el circuito más básico formado por una fuente de energía, cables y un receptor (como una bombilla).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-serie.jpg" alt="Circuito en Serie">
+                        <div class="card-content">
+                            <h3>Circuito en Serie</h3>
+                            <p>Los componentes se conectan uno tras otro. Si un componente falla, todo el circuito deja de funcionar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-paralelo.jpg" alt="Circuito en Paralelo">
+                        <div class="card-content">
+                            <h3>Circuito en Paralelo</h3>
+                            <p>Los componentes se conectan en caminos separados. Si un componente falla, los demás siguen funcionando.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="https://es-static.z-dn.net/files/d48/72444910b10858e297cecfdc72b6a1db.jpg" alt="Circuito Mixto">
+                        <div class="card-content">
+                            <h3>Circuito Mixto</h3>
+                            <p>Combina conexiones en serie y en paralelo. Es el tipo de circuito más común en aplicaciones reales.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Pregunta sobre circuitos</h3>
+                    <p>En un circuito en serie con tres bombillas, si una bombilla se funde, ¿qué pasa con las demás?</p>
+                    <button class="btn" onclick="checkCircuitAnswer('seApagan', this)">Siguen encendidas</button>
+                    <button class="btn correct" onclick="checkCircuitAnswer('seApagan', this)">Todas se apagan</button>
+                    <button class="btn" onclick="checkCircuitAnswer('seApagan', this)">Solo una se apaga</button>
+                    <button class="btn" onclick="checkCircuitAnswer('seApagan', this)">Se encienden más fuerte</button>
+                    <p id="circuit-feedback" style="margin-top: 1rem; font-weight: bold;"></p>
+                </div>
+                
+                <button class="btn" onclick="showTab('project')" style="display: block; margin: 0 auto;">¡Siguiente: Proyecto!</button>
+            </div>
+            
+            <!-- Pestaña de Proyecto -->
+            <div id="project" class="tab-content">
+                <h2>Proyectos: Maquetas con Circuitos Eléctricos</h2>
+                <p>¡Es hora de poner en práctica todo lo aprendido! Elige uno de estos proyectos para construir:</p>
+                
+                <div class="project-examples">
+                    <div class="project-card" onclick="toggleProjectDetails('solar-house')">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_1280.jpg" alt="Casa con Energía Solar">
+                        <div class="card-content">
+                            <h3>Casa con Energía Solar</h3>
+                            <p>Construye una maqueta de casa que funcione con energía solar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" onclick="toggleProjectDetails('wind-turbine')">
+                        <img src="https://cdn.pixabay.com/photo/2018/05/16/15/21/wind-turbine-3405803_1280.jpg" alt="Molino de Viento">
+                        <div class="card-content">
+                            <h3>Molino de Viento Eléctrico</h3>
+                            <p>Crea un molino que genere electricidad con la fuerza del viento.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" onclick="toggleProjectDetails('traffic-light')">
+                        <img src="https://cdn.pixabay.com/photo/2013/07/12/12/31/traffic-light-146814_1280.png" alt="Semáforo">
+                        <div class="card-content">
+                            <h3>Semáforo Inteligente</h3>
+                            <p>Diseña un sistema de semáforo con luces LED y circuito en paralelo.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detalles del proyecto Casa Solar -->
+                <div id="solar-house" class="project-details">
+                    <h3>Casa con Energía Solar</h3>
+                    <p><strong>Materiales necesarios:</strong></p>
+                    <ul>
+                        <li>Pequeño panel solar (6V)</li>
+                        <li>Batería recargable (opcional para almacenar energía)</li>
+                        <li>LEDs para iluminación</li>
+                        <li>Interruptor</li>
+                        <li>Cables con conectores</li>
+                        <li>Caja de cartón para la casa</li>
+                        <li>Pegamento, tijeras, cinta adhesiva</li>
+                        <li>Pinturas y materiales para decorar</li>
+                    </ul>
+                    
+                    <p><strong>Pasos para construirla:</strong></p>
+                    <ol>
+                        <li>Construye la estructura de la casa con la caja de cartón.</li>
+                        <li>Coloca el panel solar en el techo de la casa.</li>
+                        <li>Conecta el panel solar a la batería (si usas) y a los LEDs usando los cables.</li>
+                        <li>Añade un interruptor para encender y apagar las luces.</li>
+                        <li>Decora tu maqueta para que se vea como una casa real.</li>
+                        <li>¡Prueba tu maqueta bajo la luz del sol o una lámpara!</li>
+                    </ol>
+                    
+                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                        <h4>¿Qué aprenderás con este proyecto?</h4>
+                        <ul>
+                            <li>Cómo convertir la energía solar en eléctrica</li>
+                            <li>Cómo armar un circuito funcional</li>
+                            <li>Cómo usar componentes eléctricos reales</li>
+                            <li>La importancia de las energías renovables</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Detalles del proyecto Molino de Viento -->
+                <div id="wind-turbine" class="project-details">
+                    <h3>Molino de Viento Eléctrico</h3>
+                    <p><strong>Materiales necesarios:</strong></p>
+                    <ul>
+                        <li>Motor pequeño DC (puede ser de un juguete viejo)</li>
+                        <li>Aspas para el molino (pueden ser de plástico o cartón duro)</li>
+                        <li>LEDs o pequeño voltímetro para mostrar la electricidad generada</li>
+                        <li>Cables con conectores</li>
+                        <li>Base de cartón o madera</li>
+                        <li>Pegamento, tijeras</li>
+                        <li>Ventilador para simular el viento</li>
+                    </ul>
+                    
+                    <p><strong>Pasos para construirla:</strong></p>
+                    <ol>
+                        <li>Construye la base estable para tu molino.</li>
+                        <li>Fija el motor a la base.</li>
+                        <li>Construye y conecta las aspas al motor.</li>
+                        <li>Conecta los cables del motor al LED o voltímetro.</li>
+                        <li>Usa un ventilador para hacer girar las aspas y generar electricidad.</li>
+                        <li>Observa cómo se enciende el LED con la energía generada.</li>
+                    </ol>
+                    
+                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                        <h4>¿Qué aprenderás con este proyecto?</h4>
+                        <ul>
+                            <li>Cómo el movimiento puede generar electricidad</li>
+                            <li>Cómo funciona la energía eólica</li>
+                            <li>Principios básicos de los generadores eléctricos</li>
+                            <li>Cómo medir la electricidad generada</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Detalles del proyecto Semáforo -->
+                <div id="traffic-light" class="project-details">
+                    <h3>Semáforo Inteligente</h3>
+                    <p><strong>Materiales necesarios:</strong></p>
+                    <ul>
+                        <li>3 LEDs (rojo, amarillo, verde)</li>
+                        <li>Resistencias para LEDs (220 ohmios)</li>
+                        <li>Interruptor</li>
+                        <li>Batería de 9V</li>
+                        <li>Portapilas</li>
+                        <li>Cables</li>
+                        <li>Cartón para construir la estructura del semáforo</li>
+                        <li>Cinta aislante, pegamento</li>
+                    </ul>
+                    
+                    <p><strong>Pasos para construirla:</strong></p>
+                    <ol>
+                        <li>Construye la estructura del semáforo con cartón.</li>
+                        <li>Instala los LEDs en sus respectivos lugares (rojo arriba, amarillo en medio, verde abajo).</li>
+                        <li>Conecta cada LED con su resistencia en serie.</li>
+                        <li>Conecta todos los componentes en paralelo a la batería.</li>
+                        <li>Añade un interruptor para encender y apagar el semáforo.</li>
+                        <li>¡Prueba tu semáforo y observa cómo funcionan las luces!</li>
+                    </ol>
+                    
+                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                        <h4>¿Qué aprenderás con este proyecto?</h4>
+                        <ul>
+                            <li>Cómo funcionan los circuitos en paralelo</li>
+                            <li>Para qué sirven las resistencias</li>
+                            <li>Cómo conectar correctamente los LEDs</li>
+                            <li>Cómo diseñar un sistema de iluminación secuencial</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <h3>¡Felicidades!</h3>
+                    <p>Has completado tu aventura por el mundo de los circuitos eléctricos y las energías renovables.</p>
+                    <p>¡Ahora estás listo para crear tu propio proyecto y convertirte en un experto en electricidad!</p>
+                    <button class="btn" onclick="showTab('intro')">Volver al inicio</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Colegio Colsubsidio Ciudadela</p>
+            <p>Tecnología - Grado 4º</p>
+        </footer>
+    </div>
+
+    <script>
+        // Función para iniciar la aplicación
+        function startApp() {
+            document.getElementById('cover').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+        }
+        
+        // Funcionalidad para cambiar entre pestañas
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                showTab(tabId);
+            });
+        });
+        
+        function showTab(tabId) {
+            // Ocultar todas las pestañas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar la pestaña seleccionada
+            document.getElementById(tabId).classList.add('active');
+            
+            // Actualizar botones activos
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('data-tab') === tabId) {
+                    button.classList.add('active');
+                }
+            });
+        }
+        
+        // Funciones para los ejercicios interactivos
+        function checkAnswer(correct, element) {
+            const feedback = document.getElementById('feedback');
+            if (element.classList.contains('correct')) {
+                feedback.textContent = '¡Correcto! La batería proporciona la energía al circuito.';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Intenta nuevamente. Piensa en qué componente da energía al circuito.';
+                feedback.style.color = 'red';
+            }
+        }
+        
+        function checkCircuitAnswer(correct, element) {
+            const feedback = document.getElementById('circuit-feedback');
+            if (element.classList.contains('correct')) {
+                feedback.textContent = '¡Muy bien! En un circuito en serie, si un componente falla, se interrumpe todo el circuito.';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Piensa en cómo fluye la electricidad en un circuito en serie. Intenta nuevamente.';
+                feedback.style.color = 'red';
+            }
+        }
+        
+        // Función para mostrar/ocultar detalles del proyecto
+        function toggleProjectDetails(projectId) {
+            // Ocultar todos los detalles primero
+            document.querySelectorAll('.project-details').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Mostrar el proyecto seleccionado
+            document.getElementById(projectId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
