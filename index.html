@@ -252,6 +252,49 @@
             display: block;
         }
         
+        /* Estilos para la sección de símbolos eléctricos */
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .symbol-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .symbol-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos para la sección de circuitos reorganizada */
+        .circuit-section {
+            margin-bottom: 3rem;
+        }
+        
+        .circuit-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+        }
+        
         footer {
             background-color: var(--primary);
             color: white;
@@ -267,6 +310,10 @@
             
             .project-examples {
                 grid-template-columns: 1fr;
+            }
+            
+            .symbols-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -290,7 +337,8 @@
                 <button class="tab-btn active" data-tab="intro">Introducción</button>
                 <button class="tab-btn" data-tab="energy">Energías</button>
                 <button class="tab-btn" data-tab="components">Componentes</button>
-                <button class="tab-btn" data-tab="units">Unidades de la corriente</button>
+                <button class="tab-btn" data-tab="symbols">Símbolos Eléctricos</button>
+                <button class="tab-btn" data-tab="units">Unidades de Medida</button>
                 <button class="tab-btn" data-tab="circuits">Circuitos</button>
                 <button class="tab-btn" data-tab="project">Proyecto</button>
             </div>
@@ -391,7 +439,7 @@
                     </div>
                     
                     <div class="card">
-                        <img src="https://es.vexels.com/png-svg/vista-previa/146895/diseno-de-bombilla" alt="Bombilla">
+                        <img src="https://img.freepik.com/vector-premium/dibujo-bombilla-luz-amarilla-ella_551372-1004.jpg" alt="Bombilla">
                         <div class="card-content">
                             <h3>Bombilla</h3>
                             <p>Transforma la energía eléctrica en luz. Se enciende cuando pasa la corriente.</p>
@@ -425,7 +473,47 @@
                     <p id="feedback" style="margin-top: 1rem; font-weight: bold;"></p>
                 </div>
                 
-                <button class="btn" onclick="showTab('units')" style="display: block; margin: 0 auto;">¡Siguiente: Unidades de la corriente!</button>
+                <button class="btn" onclick="showTab('symbols')" style="display: block; margin: 0 auto;">¡Siguiente: Símbolos Eléctricos!</button>
+            </div>
+            
+            <!-- Nueva Pestaña de Símbolos Eléctricos -->
+            <div id="symbols" class="tab-content">
+                <h2>Símbolos Eléctricos</h2>
+                <p>Los símbolos eléctricos son representaciones gráficas que se utilizan en los diagramas de circuitos para representar los diferentes componentes. Estos símbolos nos permiten entender y diseñar circuitos de manera clara y universal.</p>
+                
+                <div class="symbols-grid">
+                    <div class="symbol-card">
+                        <img src="https://e7.pngegg.com/pngimages/713/724/png-clipart-incandescent-light-bulb-electronic-symbol-lamp-electric-light-light-angle-electronics.png" alt="Símbolo de Bombilla">
+                        <h3>Bombilla</h3>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <img src="https://w7.pngwing.com/pngs/258/93/png-transparent-electric-battery-electronic-symbol-schematic-circuit-diagram-electric-current-symbol-miscellaneous-angle-electronics.png" alt="Símbolo de Batería">
+                        <h3>Batería</h3>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <img src="https://i.pinimg.com/474x/aa/b8/3c/aab83c8919856b9e8947fd6176f1700f.jpg" alt="Símbolo de Resistencia">
+                        <h3>Resistencia</h3>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <img src="https://www.shutterstock.com/image-vector/closed-switch-icon-vector-symbol-260nw-2237511011.jpg" alt="Símbolo de Interruptor Cerrado">
+                        <h3>Interruptor Cerrado</h3>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <img src="https://previews.123rf.com/images/dxinerz/dxinerz1602/dxinerz160203037/52234699-switch-light-electricity-icon-vector-image-can-also-be-used-for-electric-circuits-suitable-for.jpg" alt="Símbolo de Interruptor Abierto">
+                        <h3>Interruptor Abierto</h3>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/114/114770.png" alt="Símbolo de Motor">
+                        <h3>Motor</h3>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="showTab('units')" style="display: block; margin: 0 auto;">¡Siguiente: Unidades de Medida!</button>
             </div>
             
             <!-- Pestaña de Unidades de la corriente -->
@@ -444,7 +532,7 @@
                         </div>
                         <div class="card-content">
                             <h3>Voltaje (V)</h3>
-                            <p>Es la "fuerza" que empuja a los electrones. Se mide en voltios (V).</p>
+                            <p>Es la "fuerza" que empusha a los electrones. Se mide en voltios (V).</p>
                         </div>
                     </div>
                     
@@ -487,38 +575,28 @@
                 <h2>Tipos de Circuitos Eléctricos</h2>
                 <p>Los componentes se pueden conectar de diferentes maneras, creando distintos tipos de circuitos:</p>
                 
-                <div class="card-grid">
-                    <div class="card">
-                        <img src="https://electronicaonline.net/wp-content/uploads/2020/04/diagrama-de-un-circuito-simple.jpg" alt="Circuito Simple">
-                        <div class="card-content">
-                            <h3>Circuito Simple</h3>
-                            <p>Es el circuito más básico formado por una fuente de energía, cables y un receptor (como una bombilla).</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-serie.jpg" alt="Circuito en Serie">
-                        <div class="card-content">
-                            <h3>Circuito en Serie</h3>
-                            <p>Los componentes se conectan uno tras otro. Si un componente falla, todo el circuito deja de funcionar.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-paralelo.jpg" alt="Circuito en Paralelo">
-                        <div class="card-content">
-                            <h3>Circuito en Paralelo</h3>
-                            <p>Los componentes se conectan en caminos separados. Si un componente falla, los demás siguen funcionando.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <img src="https://es-static.z-dn.net/files/d48/72444910b10858e297cecfdc72b6a1db.jpg" alt="Circuito Mixto">
-                        <div class="card-content">
-                            <h3>Circuito Mixto</h3>
-                            <p>Combina conexiones en serie y en paralelo. Es el tipo de circuito más común en aplicaciones reales.</p>
-                        </div>
-                    </div>
+                <div class="circuit-section">
+                    <h3>Circuito Simple</h3>
+                    <img src="https://electronicaonline.net/wp-content/uploads/2020/04/diagrama-de-un-circuito-simple.jpg" alt="Circuito Simple">
+                    <p>Es el circuito más básico formado por una fuente de energía, cables y un receptor (como una bombilla).</p>
+                </div>
+                
+                <div class="circuit-section">
+                    <h3>Circuito en Serie</h3>
+                    <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-serie.jpg" alt="Circuito en Serie">
+                    <p>Los componentes se conectan uno tras otro. Si un componente falla, todo el circuito deja de funcionar.</p>
+                </div>
+                
+                <div class="circuit-section">
+                    <h3>Circuito en Paralelo</h3>
+                    <img src="https://ambientech.org/wp-content/uploads/2024/04/circuito-paralelo.jpg" alt="Circuito en Paralelo">
+                    <p>Los componentes se conectan en caminos separados. Si un componente falla, los demás siguen funcionando.</p>
+                </div>
+                
+                <div class="circuit-section">
+                    <h3>Circuito Mixto</h3>
+                    <img src="https://es-static.z-dn.net/files/d48/72444910b10858e297cecfdc72b6a1db.jpg" alt="Circuito Mixto">
+                    <p>Combina conexiones en serie y en paralelo. Es el tipo de circuito más común en aplicaciones reales.</p>
                 </div>
                 
                 <div class="exercise">
@@ -541,7 +619,7 @@
                 
                 <div class="project-examples">
                     <div class="project-card" onclick="toggleProjectDetails('solar-house')">
-                        <img src="https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_1280.jpg" alt="Casa con Energía Solar">
+                        <img src="https://png.pngtree.com/background/20231030/original/pngtree-d-illustration-of-an-isolated-solar-powered-home-with-battery-on-picture-image_5809253.jpg" alt="Casa con Energía Solar">
                         <div class="card-content">
                             <h3>Casa con Energía Solar</h3>
                             <p>Construye una maqueta de casa que funcione con energía solar.</p>
@@ -549,7 +627,7 @@
                     </div>
                     
                     <div class="project-card" onclick="toggleProjectDetails('wind-turbine')">
-                        <img src="https://cdn.pixabay.com/photo/2018/05/16/15/21/wind-turbine-3405803_1280.jpg" alt="Molino de Viento">
+                        <img src="https://i.ytimg.com/vi/rFUkeqLT9xc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBgthdZ5rzR1WXvitPBufdH-gBVsw" alt="Molino de Viento">
                         <div class="card-content">
                             <h3>Molino de Viento Eléctrico</h3>
                             <p>Crea un molino que genere electricidad con la fuerza del viento.</p>
@@ -557,7 +635,7 @@
                     </div>
                     
                     <div class="project-card" onclick="toggleProjectDetails('traffic-light')">
-                        <img src="https://cdn.pixabay.com/photo/2013/07/12/12/31/traffic-light-146814_1280.png" alt="Semáforo">
+                        <img src="https://img.freepik.com/vector-gratis/semaforos-realistas_1284-4985.jpg?semt=ais_hybrid&w=740&q=80" alt="Semáforo">
                         <div class="card-content">
                             <h3>Semáforo Inteligente</h3>
                             <p>Diseña un sistema de semáforo con luces LED y circuito en paralelo.</p>
